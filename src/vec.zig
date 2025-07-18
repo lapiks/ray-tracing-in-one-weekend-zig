@@ -1,5 +1,7 @@
 const std = @import("std");
 
+pub const Vec3 = @Vector(3, f32);
+
 inline fn ensureVector(comptime T: type) type {
     if (@typeInfo(T) != .Vector) {
         @compileError("ensureVector: type is not a vector");
@@ -7,7 +9,7 @@ inline fn ensureVector(comptime T: type) type {
     return T;
 }
 
-pub inline fn vsize(comptime T: type) comptime_int {
+inline fn vector_size(comptime T: type) comptime_int {
     _ = ensureVector(T);
     return @typeInfo(T).Vector.len;
 }

@@ -1,4 +1,7 @@
 const std = @import("std");
+const color = @import("color.zig");
+
+const Color = color.Color;
 
 pub fn main() !void {
     const stdout_file = std.io.getStdOut().writer();
@@ -20,11 +23,8 @@ pub fn main() !void {
             const g = @as(f32, @floatFromInt(j)) / @as(f32, image_height - 1);
             const b = 0.0;
 
-            const ir = @as(u8, @intFromFloat(255.999 * r));
-            const ig = @as(u8, @intFromFloat(255.999 * g));
-            const ib = @as(u8, @intFromFloat(255.999 * b));
-
-            try stdout.print("{} {} {}\n", .{ ir, ig, ib });
+            const pixel_color = Color{ r, g, b };
+            try color.write_color(stdout, pixel_color);
         }
     }
 
